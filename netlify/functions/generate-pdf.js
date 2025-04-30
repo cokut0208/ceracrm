@@ -1,6 +1,6 @@
 // netlify/functions/generate-pdf.js
 const puppeteer = require('puppeteer-core');
-const chrome = require('chrome-aws-lambda');
+const chrome = require('@sparticuz/chrome-aws-lambda'); // Paketin adını değiştiriyoruz
 const { createClient } = require('@supabase/supabase-js');
 
 // Supabase bağlantı bilgileri - Bunları Netlify Environment Variables'dan alacağız
