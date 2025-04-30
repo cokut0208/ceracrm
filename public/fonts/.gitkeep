@@ -1,0 +1,6 @@
+# This file ensures the fonts directory exists in the repository
+# The actual font files should be placed here
+
+# Fonts dosyalarının bulunamaması sorunu için not:
+# InterVariable.woff2 ve InterVariable-Italic.woff2 dosyaları
+# Bu dizine kopyalanmalıdır.

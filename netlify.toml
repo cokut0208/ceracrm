@@ -1,0 +1,11 @@
+# netlify.toml
+[functions]
+  # Fonksiyon kodlarının olduğu klasör
+  directory = "netlify/functions"
+  # Node.js bağımlılıklarını nasıl paketleyeceğini söyler (esbuild hızlıdır)
+  node_bundler = "esbuild"
+
+# Build ayarların zaten burada olabilir, onlar kalsın
+[build]
+  command = "npm run build" # veya vite build vb.
+  publish = "dist"          # veya build çıktısının olduğu klasör

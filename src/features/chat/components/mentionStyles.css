@@ -1,0 +1,139 @@
+/* src/features/chat/components/mentionStyles.css (Padding Yaklaşımı Güncellendi - TAM KOD) */
+.mentions {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+.mentions__control {
+  /* Ana kontrol div'i */
+  position: relative;
+  width: 100%;
+  min-height: 48px; /* Yükseklik ayarı */
+  overflow: hidden; /* İçerik taşmasını engelle */
+
+  /* --- YENİ: Padding buraya eklendi --- */
+  padding: theme('spacing.2') theme('spacing.3'); /* Örn: Üst/Alt 8px, Sağ/Sol 12px */
+  /* ------------------------------------ */
+
+  /* Diğer temel stiller */
+  border-radius: var(--radius);
+  border-width: 1px;
+  border-color: hsl(var(--input));
+  background-color: hsl(var(--background));
+  font-size: theme('fontSize.sm');
+  line-height: theme('lineHeight.relaxed'); /* <<< Line height buraya taşındı */
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  /* display: flex; align-items: center; - Absolute konumlandırma varken genellikle gereksiz */
+  box-sizing: border-box; /* Padding ve border'ı genişliğe dahil et */
+}
+
+.mentions__control:focus-within {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring));
+}
+
+/* Hem gizli highlighter hem de görünür textarea için ortak stiller */
+.mentions__control .mentions__highlighter,
+.mentions__control .mentions__input {
+  /* --- GÜNCELLENDİ: Padding kaldırıldı, konumlandırma ayarlandı --- */
+  position: absolute;
+  top: theme('spacing.2');    /* Kontrolün üst padding'i kadar aşağıdan başla */
+  left: theme('spacing.3');   /* Kontrolün sol padding'i kadar içeriden başla */
+  right: theme('spacing.3');  /* Kontrolün sağ padding'ini hesaba kat */
+  bottom: theme('spacing.2'); /* Kontrolün alt padding'ini hesaba kat */
+  width: calc(100% - theme('spacing.3') * 2); /* Genişliği padding'e göre ayarla */
+  height: calc(100% - theme('spacing.2') * 2);/* Yüksekliği padding'e göre ayarla */
+  /* -------------------------------------------------------------------- */
+
+  box-sizing: border-box; /* Kendi padding/border'ı olmasa da önemli */
+  margin: 0;
+  min-height: calc(48px - theme('spacing.2') * 2); /* Min yüksekliği parent padding'e göre ayarla */
+  color: hsl(var(--foreground));
+  font: inherit; /* Fontu parent'tan al */
+  line-height: inherit; /* Satır yüksekliğini parent'tan al */
+
+  /* Satır kaydırma */
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Gerçek <textarea> stili */
+.mentions__control .mentions__input {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+  height: auto; /* Dikeyde büyüsün */
+  max-height: 120px; /* Maksimum yükseklik */
+  resize: none;
+  overflow-y: auto !important;
+  z-index: 1;
+  /* --- GÜNCELLENDİ: Kendi padding'i YOK --- */
+  padding: 0 !important;
+}
+
+/* Highlighter stili */
+.mentions__control .mentions__highlighter {
+  z-index: 0;
+  color: transparent;
+  overflow: hidden;
+  pointer-events: none;
+   /* --- GÜNCELLENDİ: Kendi padding'i YOK --- */
+  padding: 0 !important;
+}
+
+.mentions__control .mentions__input::placeholder {
+  color: hsl(var(--muted-foreground));
+  /* Tarayıcılar placeholder padding'ini farklı işleyebilir, gerekirse ayarla */
+  /* padding: 0; */
+}
+
+/* Mention stili (@adısoy...) */
+.mentions__mention {
+  background-color: hsla(var(--accent), 0.6);
+  border-radius: theme('borderRadius.sm');
+  padding: 0 2px;
+  font-weight: theme('fontWeight.medium');
+  color: hsl(var(--accent-foreground));
+  text-decoration: none;
+}
+
+/* Öneri listesi stilleri (Aynı kalabilir) */
+.mentions__suggestions {
+  position: absolute;
+  bottom: 100%; /* Input'un üstünde */
+  left: 0;
+  right: 0;
+  width: auto;
+  margin-left: theme('spacing.2');
+  margin-right: theme('spacing.2');
+  max-width: calc(100% - theme('spacing.4'));
+  min-width: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: theme('spacing.1');
+  border-radius: theme('borderRadius.md');
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  box-shadow: theme('boxShadow.md');
+  z-index: 10;
+  padding: theme('spacing.1');
+  list-style: none;
+}
+
+.mentions__suggestions__item {
+  padding: theme('spacing.1') theme('spacing.2');
+  border-radius: theme('borderRadius.sm');
+  cursor: pointer;
+}
+
+.mentions__suggestions__item--focused {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  outline: none;
+}

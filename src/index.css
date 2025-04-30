@@ -1,0 +1,268 @@
+/* Tailwind'in temel katmanlarını import et */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* shadcn/ui tema değişkenlerini tanımla */
+@layer base {
+  :root {
+    /* Light Tema Değişkenleri (shadcn/ui varsayılanları veya seninkiler) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%; /* Koyu Gri/Siyah */
+    --primary-foreground: 0 0% 98%; /* Çok Açık Gri/Beyaz */
+    --secondary: 0 0% 96.1%; /* Açık Gri */
+    --secondary-foreground: 0 0% 9%; /* Koyu Gri/Siyah */
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%; /* Orta Gri */
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%; /* Kırmızı */
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%; /* Açık Gri Sınır */
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%; /* Fokus Halkası */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark Tema Değişkenleri */
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%; /* Çok Açık Gri/Beyaz */
+    --primary-foreground: 0 0% 9%; /* Koyu Gri/Siyah */
+    --secondary: 0 0% 14.9%; /* Koyu Gri */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%; /* Açık Gri (Dark) */
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%; /* Koyu Kırmızı */
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%; /* Koyu Gri Sınır */
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%; /* Fokus Halkası (Dark) */
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    /* --radius dark modda aynı kalır */
+  }
+}
+
+/* Temel gövde ve genel stilleri shadcn/ui değişkenleriyle uygula */
+@layer base {
+  * {
+    @apply border-border; /* Sınır rengini değişkenden al */
+  }
+  html {
+    /* Kaydırmayı daha akıcı hale getir (opsiyonel) */
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground; /* Arka plan ve yazı rengini temadan al */
+    min-height: 100vh; /* Minimum yükseklik */
+    /* Antialiasing (Font yumuşatma) */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* shadcn/ui'nin önerdiği font özellikleri */
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Popover oku için CSS */
+/* PopoverContent'i hedeflemek için data attribute kullanabiliriz */
+[data-radix-popper-content-wrapper][data-side="bottom"] > [role="dialog"]::before {
+    content: "";                     /* İçerik boş olmalı */
+    position: absolute;              /* Mutlak konumlandırma */
+    top: -80px;                       /* Okun yüksekliği kadar yukarı taşı */
+    /* --- BURAYI AYARLA --- */
+    right: 50px;                     /* Sağdan uzaklık - İkonun üzerine denk gelecek şekilde ayarla! */
+    /* --------------------- */
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;  /* Sol kenar şeffaf */
+    border-right: 8px solid transparent; /* Sağ kenar şeffaf */
+    /* Alt kenar Popover arka plan renginde ve yukarıyı gösteriyor */
+    border-bottom: 8px solid hsl(var(--popover));
+    /* Gölge varsa okun gölgesi için (opsiyonel) */
+    /* filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.1)); */
+}
+
+/* Eğer PopoverContent'e özel bir class verirsen onu da kullanabilirsin */
+/* .custom-popover-class::before { ... } */
+
+/* Tiptap Rich Text Editor Styles */
+.ProseMirror {
+  outline: none;
+}
+
+.ProseMirror > * + * {
+  margin-top: 0.75em;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding: 0 1rem;
+}
+
+.ProseMirror ul {
+  list-style-type: disc;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+}
+
+.ProseMirror h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+.ProseMirror h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+.ProseMirror h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+.ProseMirror table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  margin: 1em 0;
+  overflow: hidden;
+}
+
+.ProseMirror table td,
+.ProseMirror table th {
+  min-width: 1em;
+  border: 1px solid #ddd;
+  padding: 0.5em 1em;
+  vertical-align: top;
+  position: relative;
+}
+
+.ProseMirror table th {
+  font-weight: bold;
+  background-color: #f5f5f5;
+}
+
+/* Custom styles for template placeholders */
+.ProseMirror *:has(> [data-placeholder]) {
+  display: inline-block;
+  background-color: rgba(245, 247, 10, 0.1);
+  padding: 0.05em 0.2em;
+  border-radius: 0.25em;
+  border: 1px dashed rgba(245, 247, 10, 0.5);
+}
+
+/* Tiptap Table Resizing Handles */
+.ProseMirror .tableWrapper {
+  overflow-x: auto; /* Tablo çok genişse yatay kaydırma */
+}
+
+.ProseMirror .column-resize-handle {
+  position: absolute;
+  right: -2px; /* Tutamacı kenarlığın biraz üzerine yerleştir */
+  top: 0;
+  bottom: -2px; /* Alt kenarlığı da kapsa */
+  width: 4px; /* Tutamacı yakalamayı kolaylaştır */
+  pointer-events: none; /* Tutamacın kendisi tıklamayı engellemesin */
+  background-color: #adf; /* Görünür renk (mavi tonu) */
+  opacity: 0.4; /* Normalde hafif soluk */
+  z-index: 30; /* Diğer elementlerin üzerinde kalsın */
+}
+
+.ProseMirror .column-resize-handle:hover {
+  opacity: 0.8;
+}
+
+/* Tiptap tarafından tablo yeniden boyutlandırılırken eklenen sınıf */
+.ProseMirror.resize-cursor {
+  cursor: col-resize;
+}
+
+/* Seçili hücrelerin etrafındaki kontroller için (varsa) */
+.ProseMirror .selectedCell::after {
+  z-index: 25;
+  position: absolute;
+  content: "";
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: rgba(173, 216, 230, 0.4); /* Açık mavi tonu */
+  pointer-events: none;
+}
+
+/* Tiptap'in tablo için varsayılan stillerini de dahil etmek iyi olabilir */
+.ProseMirror table {
+  border-collapse: collapse;
+  table-layout: fixed; /* Resizable için genellikle fixed gerekir */
+  width: 100%;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.ProseMirror td,
+.ProseMirror th {
+  min-width: 1em;
+  border: 1px solid #ced4da; /* Temel kenarlık */
+  padding: 0.5rem;
+  vertical-align: top;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.ProseMirror th {
+  font-weight: bold;
+  text-align: left;
+  background-color: #f1f3f5;
+}
+
+/* Rich Text Editor Sticky Toolbar & Scrollable Content */
+.editor-container {
+  /* İsteğe bağlı: Editörün maksimum yüksekliğini sınırlayabilirsiniz */
+   max-height: 70vh; /* Ekran yüksekliğinin %70'i kadar, ayarlanabilir */
+  /* display: flex ve flex-direction: column zaten Tailwind sınıfları ile eklendi */
+}
+
+.toolbar {
+  position: sticky;
+  top: 0; /* Sayfanın en üstüne yapış */
+  z-index: 20; /* Diğer elementlerin üzerinde kalması için (shadcn dialogları genelde z-50 kullanır, gerekirse artırılabilir) */
+  background-color: hsl(var(--background)); /* Tema arkaplanını kullan */
+  /* Tailwind: bg-muted/50 border-b p-1 flex flex-wrap items-center gap-1 shrink-0 */
+}
+
+.content-area {
+  /* Sadece bu alanın dikeyde kaydırılmasını sağlar */
+  /* overflow-y: auto; Tailwind ile eklendi */
+  /* Belirli bir yükseklik vermezsek, grow ile kalan alanı doldurur */
+  /* max-height: 500px; gibi sabit bir yükseklik de verilebilir, */
+  /* ama flex-grow ve parent'ın max-height'ı daha esnektir. */
+  /* İçerik alanı için padding EditorContent'in class'ında tanımlı (p-4) */
+}
+
+.footer {
+   background-color: hsl(var(--background)); /* Tema arkaplanını kullan */
+   /* Tailwind: text-xs text-muted-foreground text-right p-1 border-t shrink-0 */
+}
